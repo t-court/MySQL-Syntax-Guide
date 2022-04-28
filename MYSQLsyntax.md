@@ -118,32 +118,31 @@
 - Using these keywords you can build conditions to search a range of strings:
 `SELECT * FROM table_name WHERE column_name BETWEEN 'D' AND 'G';`
 - That will return all the values in the table where the named column starts with a letter between d and g.
-
 - To delete all rows from a table:
 `DELETE FROM table_name;` 
 - To DELETE an individual ROW:
 `DELETE FROM table_name WHERE [Condition];`
-The [condition] would specify the value in the row you are trying to delete.
+-The [condition] would specify the value in the row you are trying to delete.
 
 - To UPDATE a ROW:
 - The WHERE clause determines how many records will be updated.
-UPDATE table_name SET column_name = 'Its new value' WHERE "column_name" = 'existing value';
+`UPDATE table_name SET column_name = 'Its new value' WHERE "column_name" = 'existing value';`
 
 - To add a new column:
-ALTER TABLE 'table_name' ADD COLUMN column_name data_type constraint;
+`ALTER TABLE 'table_name' ADD COLUMN column_name data_type constraint;`
 - To Order by and use Distinct Order By
 - Returns data in either ascending or descending order. 
-SELECT column_name FROM table_name ORDER BY column_name asc;
+`SELECT column_name FROM table_name ORDER BY column_name asc;`
 - Often tables and columns contain many duplicate values. 
 - To select only distinct (different) values:
-SELECT DISTINCT column_name FROM table_name;
+`SELECT DISTINCT column_name FROM table_name;`
 - To Concatenate Columns use MySQL's Concat() function:
-SELECT column_name CONCAT(column_name1, " ", column_name2, " ", column_name3) AS existing_column FROM table_name;
+`SELECT column_name CONCAT(column_name1, " ", column_name2, " ", column_name3) AS existing_column FROM table_name;`
 - To Select Distinct Rows:
-SELECT DISTINCT (column_name) FROM table_name;
+`SELECT DISTINCT (column_name) FROM table_name;`
 - Use LIKE operator in a WHERE clause to search for a specified pattern in a column. 
 
-- Patterns:
+### Patterns: ###
 * The percent sign (%) represents zero, one, or multiple characters.
 
 * The underscore sign (_) represents one single character
@@ -163,20 +162,20 @@ SELECT DISTINCT (column_name) FROM table_name;
 * HERE ContactName LIKE 't%o' Finds any values that start with "t" and ends with "o"
 
 - Using LIKE operator:
-SELECT column_name, column_name FROM table_name WHERE column_name LIKE pattern:
+`SELECT column_name, column_name FROM table_name WHERE column_name LIKE pattern:`
 - To select all cars brands that start with an f in a table called cars:
-SELECT carBrand FROM cars WHERE carBrand LIKE "%f";
-
+`SELECT carBrand FROM cars WHERE carBrand LIKE "%f";
+`
 - To Create & Remove Index:
-CREATE INDEX index_name ON table_name (column_name);
-DROP INDEX index_name ON table_name;
+`CREATE INDEX index_name ON table_name (column_name);`
+`DROP INDEX index_name ON table_name;`
 
 - To use inner join;
-SELECT column_name FROM table1 INNER JOIN table2 ON join_condition;
+`SELECT column_name FROM table1 INNER JOIN table2 ON join_condition;`
 - INNER JOIN compares each row in table1 with every row in table2 based on the join condition. If rows from both tables cause the join condition to evaluate to TRUE, the INNER JOIN creates a new row whose columns contain all columns of rows from the tables and includes this new row in the result set. Otherwise, the INNER JOIN just ignores the rows.
 - If the condition does not evaluates to TRUE, the INNER JOIN returns an empty result set. This can be applied to join more than 2 tables.
 
 - To JOIN Multiple Tables:
-SELECT table_one.column_one, table_three.column_one FROM table_one JOIN table_two ON table_one.primarykey = table_two.foreignkey JOIN table_three ON table_two.primarykey = table_three.foreignkey;
+`SELECT table_one.column_one, table_three.column_one FROM table_one JOIN table_two ON table_one.primarykey = table_two.foreignkey JOIN table_three ON table_two.primarykey = table_three.foreignkey;`
 
 - Firstly we Join table 1 and table two which produces a temporary table with a combination of data from table 1 and table 2, which is then joined to table 3. This formula can be extended to more than 3 tables.
