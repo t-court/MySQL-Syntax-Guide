@@ -1,93 +1,77 @@
-MySQL Cheat Sheet/Syntax Guide
+# MySQL Cheat Sheet/Syntax Guide #
 
-1. Logging into MySQL from the terminal
+## 1. Logging into MySQL from the terminal ##
 - SSH into your web server
 - mysql -u root -p will log you into MySQL
 - After entering your password you will be logged in
 
-2. Users
-- A semicolon ; is required at the end of every MySQL statement to signify to MySQL that it is the end
+## 2. Users ##
+### A semicolon ; is required at the end of every MySQL statement to signify to MySQL that it is the end ###
 - To show all users run this command:
- SELECT user FROM mysql.user;
+ `SELECT user FROM mysql.user;`
 - To create a new user inside MySQL:
- CREATE USER 'username' IDENTIFIED BY 'password';
+ `CREATE USER 'username' IDENTIFIED BY 'password';`
 - To create a new user when connecting remotely:
- CREATE USER 'username'@'ip_address' IDENTIFIED BY 'password';
+ `CREATE USER 'username'@'ip_address' IDENTIFIED BY 'password';`
 - To create a new user on the machine with MySQL:
- CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
+ `CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';`
 - Where username, ip_address and password are your entered values.
-- The commands to grant user privileges are as follows:
- To grant all privileges -> GRANT ALL PRIVILEGES ON database_name. TO 'username'@'localhost';
- To grant limited permission -> GRANT ALL PRIVILEGES ON 'database_name.table_name' TO 'username'@'localhost';
- To show granted privileges -> SHOW GRANTS FOR 'username'@'localhost';
- To revoke user privileges -> REVOKE privilege_type ON database.table FROM 'user_name'@'localhost';
+### The commands to grant user privileges are as follows: ###
+- To grant all privileges -> `GRANT ALL PRIVILEGES ON database_name. TO 'username'@'localhost';`
+- To grant limited permission -> `GRANT ALL PRIVILEGES ON 'database_name.table_name' TO 'username'@'localhost';`
+- To show granted privileges -> `SHOW GRANTS FOR 'username'@'localhost';`
+- To revoke user privileges -> `REVOKE privilege_type ON database.table FROM 'user_name'@'localhost';`
 
-3. SHOW, DROP, & CREATE DATABASES
+## 3. SHOW, DROP, & CREATE DATABASES ##
 - To create a database:
-CREATE DATABASE 'database_name';
+`CREATE DATABASE 'database_name';`
 - To see all databases:
-show databases;
+`show databases;`
 - To delete a database:
-DROP DATABASE 'database_name';
+`DROP DATABASE 'database_name';`
 - To Select a Database to work in:
- firstly SHOW DATABASES; 
- secondly USE 'DATABASENAME';
+ firstly `SHOW DATABASES; `
+ secondly `USE 'DATABASENAME';`
 - All data in MySQL is stored in tables, each MySQL database consists of tables, and each table consists of rows and columns. The columns are named and specify the type of data where as the rows are where the actual data itself is stored.
 - To CREATE a TABLE with Columns and their proper data types:
-CREATE TABLE 'table name' (
+`CREATE TABLE 'table name' (
     column_name1 data_type CONSTRAINT, 
     column_name2 data_type CONSTRAINT, 
     column_name3 data_type CONSTRAINT 
-);
+);`
 
-4. Data Types 
-- String Data Types
+## 4. Data Types ##
+### String Data Types ###
+
 | Data type         | Description   |
 |-------------------|---------------|
 | CHAR(size)	    | A FIXED length string (can contain letters, numbers, and special  characters). The size parameter specifies the column length in characters - can be from 0 to 255. Default is 1  |
-
 | VARCHAR(size)	    | A VARIABLE length string (can contain letters, numbers, and special characters). The size parameter specifies the maximum column length in characters - can be from 0 to 65535    |
-
 | BINARY(size)	    | Equal to CHAR(), but stores binary byte strings. The size parameter specifies the column length in bytes. Default is 1    |
-
 | VARBINARY(size)	| Equal to VARCHAR(), but stores binary byte strings. The size parameter specifies the maximum column length in bytes.  |
-
 | TINYTEXT	        | Holds a string with a maximum length of 255 characters    |
-
 | TEXT(size)	    | Holds a string with a maximum length of 65,535 bytes  |
-
 | * these are not all of them but they are the most common.   |
 
-- Numeric Data Types
+### Numeric Data Types ###
+
 | Data type         | Description   |
 |-------------------|---------------|
 | BIT(size)         |  A bit-value type. The number of bits per value is specified in size. The size parameter can hold a value from 1 to 64. The default value for size is 1.  |
-
 | TINYINT(size)	    | A very small integer. Signed range is from -128 to 127. Unsigned range is from 0 to 255. The size parameter specifies the maximum display width (which is 255)    |
-
 | BOOL	            | Zero is considered as false, nonzero values are considered as true.   |
-
 | BOOLEAN	        |    Equal to BOOL  |
-
 | SMALLINT(size)	| A small integer. Signed range is from -32768 to 32767. Unsigned range is from 0 to 65535. The size parameter specifies the maximum display width (which is 255)   |
-
 | MEDIUMINT(size)	| A medium integer. Signed range is from -8388608 to 8388607. Unsigned range is from 0 to 16777215. The size parameter specifies the maximum display width (which is 255)   |
-
 | INT(size)	        | A medium integer. Signed range is from -2147483648 to 2147483647. Unsigned range is from 0 to 4294967295. The size parameter specifies the maximum display width (which is 255)   |
-
 | INTEGER(size)	    | Equal to INT(size)    |
-
 | BIGINT(size)	    | A large integer. Signed range is from -9223372036854775808 to 9223372036854775807. Unsigned range is from 0 to 18446744073709551615. The size parameter specifies the maximum display width (which is 255)    |
-
 |FLOAT(size, d)	    | A floating point number. The total number of digits is specified in size. The number of digits after the decimal point is specified in the d parameter. This syntax is deprecated in MySQL 8.0.17, and it will be removed in future MySQL versions    |
-
 | FLOAT(p)	        | A floating point number. MySQL uses the p value to determine whether to use FLOAT or DOUBLE for the resulting data type. If p is from 0 to 24, the data type becomes FLOAT(). If p is from 25 to 53, the data type becomes DOUBLE()   |
-
 | DOUBLE(size, d)	| A normal-size floating point number. The total number of digits is specified in size. The number of digits after the decimal point is specified in the d parameter    |
-
 | DECIMAL(size, d)	| An exact fixed-point number. The total number of digits is specified in size. The number of digits after the decimal point is specified in the d parameter. The maximum number for size is 65. The maximum number for d is 30. The default value for size is 10. The default value for d is 0.    |
 
-- Date and Time Data Types
+### Date and Time Data Types ###
 |  Data type  |  Description  |
 |-------------|---------------|
 | DATE	       |  A date. Format: YYYY-MM-DD. The supported range is from '1000-01-01' to '9999-12-31'  |
@@ -96,56 +80,49 @@ CREATE TABLE 'table name' (
 | TIME(fsp)	 |  A time. Format: hh:mm:ss. The supported range is from '-838:59:59' to '838:59:59'|
 | YEAR	  |  A year in four-digit format. Values allowed in four-digit format: 1901 to 2155, and 0000.  |
 
-5. Constraints
-- There are two types of constraints in mysql:
-    Column Level Constraints: Applied to individual columns, limits the data entered into the column.
-    Table Level Constraints: Applied to the whole table, limits the data entered into the table.
+## 5. Constraints ##
+### There are two types of constraints in mysql: ###
+    1. Column Level Constraints: Applied to individual columns, limits the data entered into the column.
+    2. Table Level Constraints: Applied to the whole table, limits the data entered into the table.
 
-- Common Constraints:
+### Common Constraints: ###
+
 | Contraint     | Description |
 |---------------|-------------|
 | NOT NULL      |   Column cannot have a null value.  |
-
 | AUTO_INCREMENT |  Automatically increments from 1 with every new table insert. |
-
 | UNIQUE        |  Every value inserted into constrained column must be unique. |
-
 | DEFAULT       | Sets the default value for a column when a value is not inserted into the new row.  |
-
 | PRIMARY KEY   | Used to identify each record in a table, cannot be null or empty. There can only be one primary key per table. Often used with auto_increment. |
-
 | FOREIGN KEY   | Aka the reference key, Foreign keys link tables together. The foreign key of table one matches the primary key of a different table two. Table one is referenceing table two. This allows for much more complex and intricate data storage. | 
 
-6. SHOW, DROP, & SELECT Tables
+# 6. SHOW, DROP, & SELECT Tables #
 - To show tables:
-SHOW TABLES;
+`SHOW TABLES;`
 - To delete a table:
-DROP TABLE 'table_name';
+`DROP TABLE 'table_name';`
 - To Insert ROWS & RECORDS: 
-INSERT INTO table_name (column1,column2) Values (value1column1,value1column2), (value2column1,value2column2);
-INSERT INTO table_name (column) VALUES (value);
+`INSERT INTO table_name (column1,column2) Values (value1column1,value1column2), (value2column1,value2column2);`
+`INSERT INTO table_name (column) VALUES (value);`
 
 - The columns must be in the same order they are displayed in the table. The same goes for the values.
 
 - To SELECT with the WHERE Clause:
-SELECT column_name FROM table_name WHERE column_name = 'value';
+`SELECT column_name FROM table_name WHERE column_name = 'value';`
 - The WHERE clause compares the given value with the recorded value of the named column within the named table. If they are equal then it returns the value of the selected column from that same row.
-SELECT * FROM table_name WHERE coumn_name = 'value';
+`SELECT * FROM table_name WHERE coumn_name = 'value';`
 - An asterisk is used to select and return all the columns of the named table where the named column value is equal to the given 'value'.
-- To SELECT with the WHERE Clause using a range
-- AND, IN and BETWEEN keywords can be use in conjunction with the WHERE keyword.
-
-For example:
-SELECT * FROM table_name WHERE column_name BETWEEN 10 AND 60;
+- To SELECT with the WHERE Clause using a range AND, IN and BETWEEN keywords can be use in conjunction with the WHERE keyword, for example:
+`SELECT * FROM table_name WHERE column_name BETWEEN 10 AND 60;`
 - That will return all the values in the table where the values of the named column are between 10 and 60.
 - Using these keywords you can build conditions to search a range of strings:
-SELECT * FROM table_name WHERE column_name BETWEEN 'D' AND 'G';
+`SELECT * FROM table_name WHERE column_name BETWEEN 'D' AND 'G';`
 - That will return all the values in the table where the named column starts with a letter between d and g.
 
 - To delete all rows from a table:
-DELETE FROM table_name; 
+`DELETE FROM table_name;` 
 - To DELETE an individual ROW:
-DELETE FROM table_name WHERE [Condition];
+`DELETE FROM table_name WHERE [Condition];`
 The [condition] would specify the value in the row you are trying to delete.
 
 - To UPDATE a ROW:
